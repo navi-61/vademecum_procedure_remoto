@@ -95,7 +95,8 @@
   /* Highlight for matched text */
   .highlight {
     background-color: yellow;
-    font-weight: 600;
+    font-weight: bold;
+    color: black;
   }
 </style>
 </head>
@@ -112,7 +113,7 @@
 </nav>
 
 <main>
-  <input type="text" id="searchBox" placeholder="Cerca in tutto il vademecum..." oninput="searchAll()" aria-label="Cerca nel vademecum" />
+  <input type="text" id="searchBox" placeholder="Cerca in tutto il vademecum..." oninput="searchAll()" aria-label="Cerca nel vademecum" autocomplete="off" />
 
   <details id="proc1" class="section">
     <summary>1. Procedura da remoto: Verifica e risoluzione PC lento
@@ -270,20 +271,17 @@ Passi:
 </main>
 
 <script>
-// Funzione per aprire solo una sezione alla volta
+// Apri solo la sezione cliccata, chiudi le altre
 function openSection(event, id) {
   event.preventDefault();
   document.querySelectorAll('details').forEach(det => {
-    if (det.id === id) {
-      det.open = true;
-      det.scrollIntoView({behavior: 'smooth', block: 'start'});
-    } else {
-      det.open = false;
-    }
+    det.open = (det.id === id);
   });
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-// Rimuove tutte le evidenziazioni (span.highlight)
+// Rimuove evidenziazioni precedenti
 function removeHighlights(element) {
   const highlights = element.querySelectorAll('span.highlight');
   highlights.forEach(span => {
@@ -291,51 +289,45 @@ function removeHighlights(element) {
   });
 }
 
-// Evidenzia tutte le occorrenze del testo di ricerca (case insensitive)
+// Evidenzia tutte le occorrenze del testo cercato
 function highlightText(element, text) {
-  const walk = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
-  const nodes = [];
-  while (walk.nextNode()) {
-    nodes.push(walk.currentNode);
-  }
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+  let node;
+  const regex = new RegExp(text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
 
-  nodes.forEach(node => {
-    const nodeText = node.textContent.toLowerCase();
-    if (text.length > 0 && nodeText.includes(text)) {
-      const escapedText = text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-      const regex = new RegExp(`(${escapedText})`, 'gi');
-
+  while(node = walker.nextNode()) {
+    if(node.textContent.toLowerCase().includes(text)) {
       const frag = document.createDocumentFragment();
       let lastIndex = 0;
-      const originalText = node.textContent;
       let match;
+      const originalText = node.textContent;
 
-      while ((match = regex.exec(originalText)) !== null) {
-        if (match.index > lastIndex) {
+      while((match = regex.exec(originalText)) !== null) {
+        if(match.index > lastIndex) {
           frag.appendChild(document.createTextNode(originalText.substring(lastIndex, match.index)));
         }
-        const highlightSpan = document.createElement('span');
-        highlightSpan.className = 'highlight';
-        highlightSpan.textContent = match[0];
-        frag.appendChild(highlightSpan);
+        const span = document.createElement('span');
+        span.className = 'highlight';
+        span.textContent = match[0];
+        frag.appendChild(span);
         lastIndex = match.index + match[0].length;
       }
 
-      if (lastIndex < originalText.length) {
+      if(lastIndex < originalText.length) {
         frag.appendChild(document.createTextNode(originalText.substring(lastIndex)));
       }
 
       node.parentNode.replaceChild(frag, node);
     }
-  });
+  }
 }
 
-// Funzione di ricerca estesa a tutta la pagina con evidenziazione
+// Funzione di ricerca e filtro
 function searchAll() {
-  const query = document.getElementById('searchBox').value.toLowerCase().trim();
+  const query = document.getElementById('searchBox').value.trim().toLowerCase();
   const sections = document.querySelectorAll('details.section');
 
-  if (!query) {
+  if(!query) {
     sections.forEach(section => {
       section.style.display = '';
       removeHighlights(section);
@@ -345,10 +337,9 @@ function searchAll() {
   }
 
   sections.forEach(section => {
-    const text = section.textContent.toLowerCase();
     removeHighlights(section);
-
-    if (text.includes(query)) {
+    const text = section.textContent.toLowerCase();
+    if(text.includes(query)) {
       section.style.display = '';
       section.open = true;
       highlightText(section, query);
@@ -362,7 +353,7 @@ function searchAll() {
 // Copia testo della sezione negli appunti
 function copySection(id) {
   const section = document.getElementById(id);
-  if (!section) return;
+  if(!section) return;
   const text = section.textContent.trim();
   navigator.clipboard.writeText(text).then(() => {
     alert("Testo copiato negli appunti!");
