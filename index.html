@@ -1,365 +1,147 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vademecum Web per Attività</title>
 <style>
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0; padding: 0;
-    display: flex;
-    min-height: 100vh;
-  }
-  nav {
-    width: 250px;
-    background: #004880;
-    color: white;
-    padding: 1em;
-    box-sizing: border-box;
-  }
-  nav h2 {
-    font-size: 1.5em;
-    margin-top: 0;
-  }
-  nav ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  nav ul li {
-    margin: 0.5em 0;
-  }
-  nav ul li a {
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  nav ul li a:hover {
-    text-decoration: underline;
-  }
-
-  main {
-    flex-grow: 1;
-    padding: 1em 2em;
-    overflow-y: auto;
-    max-height: 100vh;
-  }
-
-  /* Sticky search box */
-  #searchBox {
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 10;
-    border-bottom: 1px solid #ccc;
-    padding: 0.5em 0.75em;
-    font-size: 1em;
-    margin-bottom: 1.5em;
-  }
-
-  details {
-    margin-bottom: 1.5em;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 0.5em 1em;
-    background: #f9f9f9;
-  }
-  details[open] {
-    box-shadow: 0 0 5px rgba(0, 72, 128, 0.5);
-  }
-  details summary {
-    font-weight: 600;
-    cursor: pointer;
-    outline: none;
-  }
-
-  .section-content {
-    margin-top: 0.75em;
-    white-space: pre-wrap;
-  }
-
-  button.copy-btn {
-    background-color: #0078d7;
-    color: white;
-    border: none;
-    padding: 0.3em 0.6em;
-    border-radius: 3px;
-    cursor: pointer;
-    float: right;
-    font-size: 0.9em;
-  }
-  button.copy-btn:hover {
-    background-color: #005a9e;
-  }
-
-  /* Highlight for matched text */
-  .highlight {
-    background-color: yellow;
-    font-weight: bold;
-    color: black;
-  }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        display: flex;
+    }
+    .sidebar {
+        width: 250px;
+        background: #2c3e50;
+        color: white;
+        padding: 15px;
+        height: 100vh;
+        overflow-y: auto;
+        position: fixed;
+    }
+    .sidebar h2 {
+        font-size: 18px;
+        margin-top: 0;
+    }
+    .sidebar a {
+        display: block;
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+    .sidebar a:hover {
+        background: #34495e;
+    }
+    .content {
+        margin-left: 260px;
+        padding: 20px;
+        flex: 1;
+    }
+    details {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    summary {
+        cursor: pointer;
+        font-weight: bold;
+    }
+    button.copy-btn {
+        float: right;
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button.copy-btn:hover {
+        background: #2980b9;
+    }
+    mark {
+        background-color: yellow;
+        color: black;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 6px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
 </style>
 </head>
 <body>
 
-<nav>
-  <h2>Menu</h2>
-  <ul id="menuList">
-    <li><a href="#proc1" onclick="openSection(event, 'proc1')">1. Verifica PC lento</a></li>
-    <li><a href="#proc2" onclick="openSection(event, 'proc2')">2. Problema connessione rete</a></li>
-    <li><a href="#proc3" onclick="openSection(event, 'proc3')">3. Problema stampante</a></li>
-    <li><a href="#proc4" onclick="openSection(event, 'proc4')">4. Aggiornamento software/driver</a></li>
-  </ul>
-</nav>
+<div class="sidebar">
+    <h2>Indice</h2>
+    <input type="text" id="searchBox" placeholder="Cerca...">
+    <nav id="menu"></nav>
+</div>
 
-<main>
-  <input type="text" id="searchBox" placeholder="Cerca in tutto il vademecum..." oninput="searchAll()" aria-label="Cerca nel vademecum" autocomplete="off" />
+<div class="content" id="mainContent">
 
-  <details id="proc1" class="section">
-    <summary>1. Procedura da remoto: Verifica e risoluzione PC lento
-      <button class="copy-btn" onclick="copySection('proc1')">Copia</button>
-    </summary>
-    <div class="section-content">
-Obiettivo: Identificare cause di rallentamento e risolvere problemi prestazionali.
+    <details id="sec1">
+        <summary>Procedura 1</summary>
+        <button class="copy-btn" onclick="copySection('sec1')">Copia</button>
+        <p>Questa è una procedura di esempio per attività da remoto.</p>
+    </details>
 
-Passi:
-1. ▶️ Connessione remota
-   Accedi al PC tramite software remoto (es. AnyDesk, TeamViewer, Remote Desktop).
+    <details id="sec2">
+        <summary>Procedura 2</summary>
+        <button class="copy-btn" onclick="copySection('sec2')">Copia</button>
+        <p>Questa sezione contiene istruzioni tecniche specifiche per la gestione delle connessioni.</p>
+    </details>
 
-2. 🔍 Verifica carico risorse
-   Apri Task Manager (Ctrl + Shift + Esc) → scheda Prestazioni
-   Controlla CPU, RAM, disco e rete per picchi o utilizzi anomali.
+    <details id="sec3">
+        <summary>Procedura 3</summary>
+        <button class="copy-btn" onclick="copySection('sec3')">Copia</button>
+        <p>Guida alla risoluzione di problemi con stampanti di rete.</p>
+    </details>
 
-3. 🛠️ Identifica processi pesanti
-   Task Manager → scheda Processi
-   Ordina per CPU o memoria per vedere processi che consumano risorse.
-
-4. ⚙️ Verifica servizi e processi anomali
-   Task Manager → scheda Servizi
-   Riavvia servizi bloccati o sospetti (clic destro > Riavvia).
-
-5. ⚙️ Controlla avvio automatico
-   Task Manager → scheda Avvio
-   Disabilita programmi non necessari all’avvio.
-
-6. 📁 Controlla spazio disco
-   Apri “Questo PC” → verifica spazio disponibile su disco C:
-   Se poco spazio, pulisci con “Pulizia disco” o elimina file temporanei.
-
-7. 🛠️ Esegui scansione malware
-   Avvia scansione antivirus aggiornata.
-
-8. ⚙️ Aggiorna Windows e driver
-   Controlla aggiornamenti Windows (Impostazioni > Windows Update)
-   Aggiorna driver (gestione dispositivi o software del produttore).
-
-9. 🔄 Riavvio finale
-   Riavvia il PC per applicare eventuali modifiche.
-
-10. ✔️ Verifica finale
-    Controlla se il PC ha migliorato la velocità e comunica con l’utente.
-    </div>
-  </details>
-
-  <details id="proc2" class="section">
-    <summary>2. Procedura da remoto: Problema connessione internet / rete
-      <button class="copy-btn" onclick="copySection('proc2')">Copia</button>
-    </summary>
-    <div class="section-content">
-Obiettivo: Diagnosticare e risolvere problemi di connettività.
-
-Passi:
-1. ▶️ Connessione remota
-
-2. 🌐 Verifica stato rete
-   Win + R → cmd → esegui ipconfig /all
-   Controlla indirizzo IP, gateway, DNS.
-
-3. 🔍 Ping test
-   Esegui ping 8.8.8.8 → verifica perdita pacchetti.
-   Esegui ping google.com → verifica risoluzione DNS.
-
-4. 🌐 Verifica gateway e rete locale
-   Esegui ping &lt;indirizzo gateway&gt; (es. 192.168.1.1).
-
-5. 🔄 Reset stack TCP/IP e DNS
-   CMD (admin):
-   netsh int ip reset
-   ipconfig /flushdns
-   ipconfig /release
-   ipconfig /renew
-
-6. ⚙️ Verifica configurazione proxy/VPN
-   Controlla impostazioni proxy e stato VPN.
-
-7. 🛑 Disabilita temporaneamente firewall/antivirus
-   Per testare eventuali blocchi.
-
-8. 🔌 Verifica cavi e dispositivi
-   Chiedi all’utente di controllare i cavi fisici.
-
-9. 🔄 Riavvia scheda di rete
-   Pannello di controllo > Rete e Internet > Centro connessioni di rete > Modifica impostazioni scheda
-   Disabilita e riabilita la scheda di rete.
-
-10. 📞 Segnala se necessario a livello superiore
-    </div>
-  </details>
-
-  <details id="proc3" class="section">
-    <summary>3. Procedura da remoto: Problema stampante
-      <button class="copy-btn" onclick="copySection('proc3')">Copia</button>
-    </summary>
-    <div class="section-content">
-Obiettivo: Risolvere problemi di stampa o riconoscimento stampante.
-
-Passi:
-1. ▶️ Connessione remota
-
-2. 🖨️ Verifica stato stampante
-   Controlla che la stampante sia accesa e collegata (USB o rete).
-   Pannello di controllo > Dispositivi e stampanti.
-
-3. 🗑️ Controlla code di stampa
-   Elimina eventuali lavori bloccati.
-
-4. 🔄 Riavvia spooler di stampa
-   CMD (admin):
-   net stop spooler
-   net start spooler
-
-5. ⚙️ Verifica driver stampante
-   Aggiorna o reinstalla driver se necessario.
-
-6. 🖨️ Test di stampa
-   Esegui pagina di prova.
-
-7. 🌐 Verifica configurazione rete (stampanti di rete)
-   Ping all’indirizzo IP stampante.
-
-8. 🔐 Controlla permessi di stampa e condivisione
-
-9. 🔄 Riavvia PC e stampante
-    </div>
-  </details>
-
-  <details id="proc4" class="section">
-    <summary>4. Procedura da remoto: Aggiornamento software o driver
-      <button class="copy-btn" onclick="copySection('proc4')">Copia</button>
-    </summary>
-    <div class="section-content">
-Obiettivo: Aggiornare software o driver per migliorare stabilità o sicurezza.
-
-Passi:
-1. ▶️ Connessione remota
-
-2. 📋 Verifica versione corrente
-
-3. 📁 Backup dati/configurazioni (se necessario)
-
-4. 🌐 Scarica aggiornamenti ufficiali
-
-5. ⚙️ Installa aggiornamenti
-
-6. ✔️ Verifica esito installazione
-
-7. 🔄 Riavvia sistema se richiesto
-
-8. 🧪 Test funzionalità
-    </div>
-  </details>
-</main>
+</div>
 
 <script>
-// Apri solo la sezione cliccata, chiudi le altre
-function openSection(event, id) {
-  event.preventDefault();
-  document.querySelectorAll('details').forEach(det => {
-    det.open = (det.id === id);
-  });
-  const el = document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
-}
+document.addEventListener("DOMContentLoaded", function() {
+    const detailsElements = document.querySelectorAll("details");
+    const menu = document.getElementById("menu");
 
-// Rimuove evidenziazioni precedenti
-function removeHighlights(element) {
-  const highlights = element.querySelectorAll('span.highlight');
-  highlights.forEach(span => {
-    span.replaceWith(document.createTextNode(span.textContent));
-  });
-}
-
-// Evidenzia tutte le occorrenze del testo cercato
-function highlightText(element, text) {
-  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
-  let node;
-  const regex = new RegExp(text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi');
-
-  while(node = walker.nextNode()) {
-    if(node.textContent.toLowerCase().includes(text)) {
-      const frag = document.createDocumentFragment();
-      let lastIndex = 0;
-      let match;
-      const originalText = node.textContent;
-
-      while((match = regex.exec(originalText)) !== null) {
-        if(match.index > lastIndex) {
-          frag.appendChild(document.createTextNode(originalText.substring(lastIndex, match.index)));
-        }
-        const span = document.createElement('span');
-        span.className = 'highlight';
-        span.textContent = match[0];
-        frag.appendChild(span);
-        lastIndex = match.index + match[0].length;
-      }
-
-      if(lastIndex < originalText.length) {
-        frag.appendChild(document.createTextNode(originalText.substring(lastIndex)));
-      }
-
-      node.parentNode.replaceChild(frag, node);
-    }
-  }
-}
-
-// Funzione di ricerca e filtro
-function searchAll() {
-  const query = document.getElementById('searchBox').value.trim().toLowerCase();
-  const sections = document.querySelectorAll('details.section');
-
-  if(!query) {
-    sections.forEach(section => {
-      section.style.display = '';
-      removeHighlights(section);
-      section.open = false;
+    detailsElements.forEach((detail, index) => {
+        const summary = detail.querySelector("summary").innerText;
+        const link = document.createElement("a");
+        link.href = "#" + detail.id;
+        link.textContent = summary;
+        link.addEventListener("click", () => {
+            detailsElements.forEach(d => d.removeAttribute("open"));
+            detail.setAttribute("open", "");
+            detail.scrollIntoView({ behavior: "smooth" });
+        });
+        menu.appendChild(link);
     });
-    return;
-  }
 
-  sections.forEach(section => {
-    removeHighlights(section);
-    const text = section.textContent.toLowerCase();
-    if(text.includes(query)) {
-      section.style.display = '';
-      section.open = true;
-      highlightText(section, query);
-    } else {
-      section.style.display = 'none';
-      section.open = false;
-    }
-  });
-}
+    document.getElementById("searchBox").addEventListener("input", function() {
+        const searchTerm = this.value.trim();
+        const regex = new RegExp(searchTerm, "gi");
 
-// Copia testo della sezione negli appunti
+        document.querySelectorAll("details p, details summary").forEach(el => {
+            el.innerHTML = el.textContent;
+        });
+
+        if (searchTerm) {
+            document.querySelectorAll("details p, details summary").forEach(el => {
+                el.innerHTML = el.textContent.replace(regex, match => `<mark>${match}</mark>`);
+            });
+        }
+    });
+});
+
 function copySection(id) {
-  const section = document.getElementById(id);
-  if(!section) return;
-  const text = section.textContent.trim();
-  navigator.clipboard.writeText(text).then(() => {
-    alert("Testo copiato negli appunti!");
-  }).catch(() => {
-    alert("Impossibile copiare il testo.");
-  });
+    const content = document.querySelector(`#${id}`).innerText;
+    navigator.clipboard.writeText(content).then(() => {
+        alert("Contenuto copiato!");
+    });
 }
 </script>
 
