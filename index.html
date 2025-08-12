@@ -1,468 +1,157 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Vademecum Web per Attività - Procedure da remoto</title>
+<meta charset="UTF-8">
+<title>Guida Operativa</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <style>
-  :root {
-    --sidebar-bg: #003f66;
-    --accent: #0078d7;
-  }
-  body {
-    margin: 0;
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    display: flex;
-    min-height: 100vh;
-  }
-
-  /* Sidebar */
-  nav#sidebar {
-    width: 260px;
-    background: var(--sidebar-bg);
-    color: #e6f2ff;
-    padding: 18px;
-    box-sizing: border-box;
-    position: fixed;
-    height: 100vh;
-    overflow-y: auto;
-  }
-  nav#sidebar h1 {
-    font-size: 16px;
-    margin: 0 0 12px 0;
-  }
-  nav#sidebar input[type="search"] {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: none;
-    margin-bottom: 12px;
-    box-sizing: border-box;
-  }
-  nav#sidebar ul { list-style: none; padding: 0; margin: 0; }
-  nav#sidebar li { margin: 6px 0; }
-  nav#sidebar a { color: #e6f2ff; text-decoration: none; display: block; padding: 6px 6px; border-radius: 4px;}
-  nav#sidebar a:hover { background: rgba(255,255,255,0.04); }
-
-  /* Main */
-  main#main {
-    margin-left: 260px;
-    padding: 20px;
-    flex: 1;
-    background: #f6f8fa;
-  }
-
-  /* Details / Sections */
-  details.section {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-bottom: 14px;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.03);
-  }
-  details.section[open] {
-    box-shadow: 0 4px 14px rgba(2,6,23,0.06);
-  }
-  details summary {
-    font-weight: 700;
-    cursor: pointer;
-    display: block;
-    margin: -12px -14px 8px -14px;
-    padding: 12px 14px;
-    background: transparent;
-    border-radius: 8px 8px 0 0;
-  }
-
-  .section-controls {
-    float: right;
-    margin-top: -32px;
-  }
-  .copy-btn {
-    background: var(--accent);
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-  .copy-btn:active { transform: translateY(1px); }
-
-  .section-content {
-    white-space: pre-wrap;
-    color: #222;
-    line-height: 1.45;
-    margin-top: 6px;
-  }
-
-  /* Highlight */
-  span.highlight {
-    background: #ffea7a;
-    color: #111;
-    padding: 0 2px;
-    font-weight: 700;
-    border-radius: 2px;
-  }
-
-  /* small screens */
-  @media (max-width: 800px) {
-    nav#sidebar { position: relative; width: 100%; height: auto; }
-    main#main { margin-left: 0; padding: 12px; }
-  }
+body { font-family: Arial, sans-serif; display: flex; }
+#menu { width: 250px; padding: 10px; border-right: 1px solid #ccc; }
+#menu ul { list-style: none; padding: 0; }
+#menu ul li { margin: 5px 0; }
+#content { padding: 20px; flex: 1; }
+.highlight { background: yellow; }
+summary { cursor: pointer; font-weight: bold; }
 </style>
 </head>
 <body>
 
-<nav id="sidebar" aria-label="Indice vademecum">
-  <h1>Vademecum Web per Attività</h1>
-  <input id="searchBox" type="search" placeholder="Cerca in tutto il vademecum..." aria-label="Cerca" autocomplete="off" />
+<div id="menu">
+  <input type="text" id="searchBox" placeholder="Cerca..." style="width:100%;padding:5px;">
   <ul id="menuList"></ul>
-</nav>
+</div>
 
-<main id="main" role="main">
-  <!-- Sezione 1 -->
-  <details id="proc1" class="section">
-    <summary>
-      1. Procedura da remoto: Verifica e risoluzione PC lento
-    </summary>
-    <div class="section-controls">
-      <button class="copy-btn" data-target="proc1">Copia</button>
-    </div>
+<div id="content">
+  <!-- Esempio struttura -->
+  <details class="section" id="sec1">
+    <summary>1. Diagnostica di sistema</summary>
     <div class="section-content">
-Obiettivo: Identificare cause di rallentamento e risolvere problemi prestazionali.
-
-Passi:
-1. ▶️ Connessione remota
-   Accedi al PC tramite software remoto (es. AnyDesk, TeamViewer, Remote Desktop).
-
-2. 🔍 Verifica carico risorse
-   Apri Task Manager (Ctrl + Shift + Esc) → scheda Prestazioni
-   Controlla CPU, RAM, disco e rete per picchi o utilizzi anomali.
-
-3. 🛠️ Identifica processi pesanti
-   Task Manager → scheda Processi
-   Ordina per CPU o memoria per vedere processi che consumano risorse.
-
-4. ⚙️ Verifica servizi e processi anomali
-   Task Manager → scheda Servizi
-   Riavvia servizi bloccati o sospetti (clic destro > Riavvia).
-
-5. ⚙️ Controlla avvio automatico
-   Task Manager → scheda Avvio
-   Disabilita programmi non necessari all’avvio.
-
-6. 📁 Controlla spazio disco
-   Apri “Questo PC” → verifica spazio disponibile su disco C:
-   Se poco spazio, pulisci con “Pulizia disco” o elimina file temporanei.
-
-7. 🛠️ Esegui scansione malware
-   Avvia scansione antivirus aggiornata.
-
-8. ⚙️ Aggiorna Windows e driver
-   Controlla aggiornamenti Windows (Impostazioni > Windows Update)
-   Aggiorna driver (gestione dispositivi o software del produttore).
-
-9. 🔄 Riavvio finale
-   Riavvia il PC per applicare eventuali modifiche.
-
-10. ✔️ Verifica finale
-    Controlla se il PC ha migliorato la velocità e comunica con l’utente.
+      <p>Connessione remota</p>
+      <p>Verifica carico risorse</p>
+      <p>Identifica processi pesanti</p>
+      <p>Controlla spazio disco</p>
     </div>
   </details>
 
-  <!-- Sezione 2 -->
-  <details id="proc2" class="section">
-    <summary>
-      2. Procedura da remoto: Problema connessione internet / rete
-    </summary>
-    <div class="section-controls">
-      <button class="copy-btn" data-target="proc2">Copia</button>
-    </div>
+  <details class="section" id="sec2">
+    <summary>2. Diagnostica rete</summary>
     <div class="section-content">
-Obiettivo: Diagnosticare e risolvere problemi di connettività.
-
-Passi:
-1. ▶️ Connessione remota
-
-2. 🌐 Verifica stato rete
-   Win + R → cmd → esegui ipconfig /all
-   Controlla indirizzo IP, gateway, DNS.
-
-3. 🔍 Ping test
-   Esegui ping 8.8.8.8 → verifica perdita pacchetti.
-   Esegui ping google.com → verifica risoluzione DNS.
-
-4. 🌐 Verifica gateway e rete locale
-   Esegui ping &lt;indirizzo gateway&gt; (es. 192.168.1.1).
-
-5. 🔄 Reset stack TCP/IP e DNS
-   CMD (admin):
-   netsh int ip reset
-   ipconfig /flushdns
-   ipconfig /release
-   ipconfig /renew
-
-6. ⚙️ Verifica configurazione proxy/VPN
-   Controlla impostazioni proxy e stato VPN.
-
-7. 🛑 Disabilita temporaneamente firewall/antivirus
-   Per testare eventuali blocchi.
-
-8. 🔌 Verifica cavi e dispositivi
-   Chiedi all’utente di controllare i cavi fisici.
-
-9. 🔄 Riavvia scheda di rete
-   Pannello di controllo > Rete e Internet > Centro connessioni di rete > Modifica impostazioni scheda
-   Disabilita e riabilita la scheda di rete.
-
-10. 📞 Segnala se necessario a livello superiore
+      <p>Verifica stato rete</p>
+      <p>Ping test</p>
+      <p>Verifica configurazione rete</p>
     </div>
   </details>
 
-  <!-- Sezione 3 -->
-  <details id="proc3" class="section">
-    <summary>
-      3. Procedura da remoto: Problema stampante
-    </summary>
-    <div class="section-controls">
-      <button class="copy-btn" data-target="proc3">Copia</button>
-    </div>
+  <details class="section" id="sec3">
+    <summary>3. Procedura da remoto: Problema stampante</summary>
     <div class="section-content">
-Obiettivo: Risolvere problemi di stampa o riconoscimento stampante.
-
-Passi:
-1. ▶️ Connessione remota
-
-2. 🖨️ Verifica stato stampante
-   Controlla che la stampante sia accesa e collegata (USB o rete).
-   Pannello di controllo > Dispositivi e stampanti.
-
-3. 🗑️ Controlla code di stampa
-   Elimina eventuali lavori bloccati.
-
-4. 🔄 Riavvia spooler di stampa
-   CMD (admin):
-   net stop spooler
-   net start spooler
-
-5. ⚙️ Verifica driver stampante
-   Aggiorna o reinstalla driver se necessario.
-
-6. 🖨️ Test di stampa
-   Esegui pagina di prova.
-
-7. 🌐 Verifica configurazione rete (stampanti di rete)
-   Ping all’indirizzo IP stampante.
-
-8. 🔐 Controlla permessi di stampa e condivisione
-
-9. 🔄 Riavvia PC e stampante
+      <p>Verifica stato stampante</p>
+      <p>Test di stampa</p>
+      <p>Verifica configurazione rete</p> <!-- icona mancante aggiunta via script -->
     </div>
   </details>
-
-  <!-- Sezione 4 -->
-  <details id="proc4" class="section">
-    <summary>
-      4. Procedura da remoto: Aggiornamento software o driver
-    </summary>
-    <div class="section-controls">
-      <button class="copy-btn" data-target="proc4">Copia</button>
-    </div>
-    <div class="section-content">
-Obiettivo: Aggiornare software o driver per migliorare stabilità o sicurezza.
-
-Passi:
-1. ▶️ Connessione remota
-
-2. 📋 Verifica versione corrente
-
-3. 📁 Backup dati/configurazioni (se necessario)
-
-4. 🌐 Scarica aggiornamenti ufficiali
-
-5. ⚙️ Installa aggiornamenti
-
-6. ✔️ Verifica esito installazione
-
-7. 🔄 Riavvia sistema se richiesto
-
-8. 🧪 Test funzionalità
-    </div>
-  </details>
-
-</main>
+</div>
 
 <script>
-/* ===== util ===== */
-function escapeRegExp(s) {
-  return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const menuList = document.getElementById("menuList");
+  const searchBox = document.getElementById("searchBox");
+  const sections = document.querySelectorAll("details.section");
 
-/* remove highlights inside an element */
-function removeHighlights(root) {
-  const spans = root.querySelectorAll('span.highlight');
-  spans.forEach(sp => {
-    sp.replaceWith(document.createTextNode(sp.textContent));
-  });
-}
-
-/* highlight occurrences inside a given element, excluding text nodes that are inside buttons */
-function highlightInElement(root, query) {
-  if (!query) return;
-  const escaped = escapeRegExp(query);
-  const regex = new RegExp(escaped, 'gi');
-
-  // TreeWalker to iterate only text nodes
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-    acceptNode: function(node) {
-      // skip empty text nodes
-      if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-      // do not highlight inside buttons
-      let p = node.parentNode;
-      while (p && p !== root) {
-        if (p.nodeName === 'BUTTON') return NodeFilter.FILTER_REJECT;
-        p = p.parentNode;
-      }
-      return NodeFilter.FILTER_ACCEPT;
-    }
-  }, false);
-
-  const textNodes = [];
-  while(walker.nextNode()) textNodes.push(walker.currentNode);
-
-  textNodes.forEach(node => {
-    const textLower = node.nodeValue.toLowerCase();
-    if (textLower.indexOf(query.toLowerCase()) === -1) return;
-
-    const originalText = node.nodeValue;
-    let lastIndex = 0;
-    const frag = document.createDocumentFragment();
-    let match;
-
-    // use regex.exec loop to capture all matches
-    while ((match = regex.exec(originalText)) !== null) {
-      const idx = match.index;
-      if (idx > lastIndex) {
-        frag.appendChild(document.createTextNode(originalText.substring(lastIndex, idx)));
-      }
-      const span = document.createElement('span');
-      span.className = 'highlight';
-      span.textContent = match[0];
-      frag.appendChild(span);
-      lastIndex = idx + match[0].length;
-    }
-
-    if (lastIndex < originalText.length) {
-      frag.appendChild(document.createTextNode(originalText.substring(lastIndex)));
-    }
-
-    node.parentNode.replaceChild(frag, node);
-  });
-}
-
-/* ===== main behavior ===== */
-document.addEventListener('DOMContentLoaded', () => {
-  const sections = Array.from(document.querySelectorAll('details.section'));
-  const menuList = document.getElementById('menuList');
-  const searchBox = document.getElementById('searchBox');
-
-  // build menu links
-  sections.forEach(sec => {
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = '#' + sec.id;
-    a.textContent = sec.querySelector('summary').textContent.trim();
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      sections.forEach(s => s.open = false);
-      sec.open = true;
-      sec.scrollIntoView({behavior:'smooth', block:'start'});
-    });
+  sections.forEach(section => {
+    const summary = section.querySelector("summary");
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = "#" + section.id;
+    a.textContent = summary.textContent;
     li.appendChild(a);
     menuList.appendChild(li);
+    section.dataset.original = section.querySelector(".section-content").innerHTML;
   });
 
-  // store original content snapshots for each section (for safe restore)
-  sections.forEach(sec => {
-    const summary = sec.querySelector('summary');
-    const content = sec.querySelector('.section-content');
-    summary.setAttribute('data-original', summary.innerHTML);
-    content.setAttribute('data-original', content.innerHTML);
-  });
-
-  // copy buttons
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = btn.getAttribute('data-target');
-      const sec = document.getElementById(id);
-      if (!sec) return;
-      // copy summary text + visible content text
-      const summaryText = sec.querySelector('summary').textContent.trim();
-      const contentText = sec.querySelector('.section-content').innerText.trim();
-      const text = summaryText + "\n\n" + contentText;
-      navigator.clipboard.writeText(text).then(() => {
-        btn.textContent = '✓ Copiato';
-        setTimeout(()=> btn.textContent = 'Copia', 1400);
-      }).catch(()=> {
-        alert('Impossibile copiare negli appunti');
-      });
-    });
-  });
-
-  // search handler
-  function doSearch() {
-    const q = searchBox.value.trim();
-    if (!q) {
-      // empty: restore originals, show all, close all
-      sections.forEach(sec => {
-        const summary = sec.querySelector('summary');
-        const content = sec.querySelector('.section-content');
-        removeHighlights(summary);
-        removeHighlights(content);
-        // restore to original HTML (keeps buttons intact)
-        summary.innerHTML = summary.getAttribute('data-original');
-        content.innerHTML = content.getAttribute('data-original');
-        sec.style.display = '';
-        sec.open = false;
-      });
-      return;
-    }
-
-    // non-empty: filter + highlight
-    sections.forEach(sec => {
-      const summary = sec.querySelector('summary');
-      const content = sec.querySelector('.section-content');
-
-      // restore original (clean previous highlights)
-      summary.innerHTML = summary.getAttribute('data-original');
-      content.innerHTML = content.getAttribute('data-original');
-
-      // check whether the textual content contains the query (case-insensitive)
-      const combinedText = (summary.textContent + ' ' + content.textContent).toLowerCase();
-      if (combinedText.indexOf(q.toLowerCase()) !== -1) {
-        sec.style.display = '';
-        sec.open = true;
-        // highlight matches inside summary and content (preserving buttons)
-        highlightInElement(summary, q);
-        highlightInElement(content, q);
+  searchBox.addEventListener("input", () => {
+    const q = searchBox.value.toLowerCase();
+    sections.forEach(section => {
+      const content = section.dataset.original;
+      if (content.toLowerCase().includes(q) || section.querySelector("summary").textContent.toLowerCase().includes(q)) {
+        section.style.display = "";
+        section.open = q !== "";
+        if (q) {
+          section.querySelector(".section-content").innerHTML =
+            content.replace(new RegExp(`(${q})`, "gi"), `<span class="highlight">$1</span>`);
+        } else {
+          section.querySelector(".section-content").innerHTML = content;
+        }
       } else {
-        sec.style.display = 'none';
-        sec.open = false;
+        section.style.display = "none";
       }
     });
-  }
-
-  // live search with debounce to avoid too many operations on large docs
-  let searchTimer = null;
-  searchBox.addEventListener('input', () => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(doSearch, 120);
   });
 
-  // ensure page loads with no section open
-  sections.forEach(s => s.open = false);
+  const iconMap = {
+    "Connessione remota": "fa-laptop-code",
+    "Verifica carico risorse": "fa-microchip",
+    "Identifica processi pesanti": "fa-tasks",
+    "Controlla spazio disco": "fa-hdd",
+    "Verifica stato rete": "fa-network-wired",
+    "Ping test": "fa-search",
+    "Verifica configurazione rete": "fa-network-wired",
+    "Verifica stato stampante": "fa-print",
+    "Test di stampa": "fa-print"
+  };
+
+  const iconColors = {
+    diagnostica: "#0078d7",
+    rete: "#28a745",
+    sicurezza: "#dc3545",
+    aggiornamento: "#ffc107"
+  };
+
+  const categoryMap = {
+    "fa-microchip": "diagnostica",
+    "fa-tasks": "diagnostica",
+    "fa-hdd": "diagnostica",
+    "fa-network-wired": "rete",
+    "fa-search": "rete",
+    "fa-print": "rete"
+  };
+
+  document.querySelectorAll(".section-content").forEach(content => {
+    let html = content.innerHTML;
+    Object.entries(iconMap).forEach(([text, icon]) => {
+      const regex = new RegExp(`(${text})`, "g");
+      const color = iconColors[categoryMap[icon]] || "#555";
+      html = html.replace(regex, `<i class="fas ${icon}" style="color:${color}"></i> $1`);
+    });
+    content.innerHTML = html;
+  });
+
+  document.querySelectorAll("details.section summary").forEach(summary => {
+    const text = summary.textContent.trim();
+    let iconKey = Object.keys(iconMap).find(k => text.includes(k));
+    if (!iconKey) {
+      if (text.toLowerCase().includes("stampante")) iconKey = "Verifica stato stampante";
+      else if (text.toLowerCase().includes("rete")) iconKey = "Verifica stato rete";
+      else if (text.toLowerCase().includes("diagnostica")) iconKey = "Verifica carico risorse";
+    }
+    if (iconKey) {
+      const icon = iconMap[iconKey];
+      const color = iconColors[categoryMap[icon]] || "#555";
+      summary.innerHTML = `<i class="fas ${icon}" style="color:${color};margin-right:6px"></i>` + summary.textContent;
+    }
+  });
+
+  document.querySelectorAll("#menuList a, details.section summary").forEach(el => {
+    el.addEventListener("click", () => {
+      searchBox.value = "";
+      sections.forEach(section => {
+        section.style.display = "";
+        section.querySelector(".section-content").innerHTML = section.dataset.original;
+      });
+    });
+  });
 });
 </script>
+
 </body>
 </html>
