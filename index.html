@@ -1,157 +1,551 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Guida Operativa</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vademecum Web per Attività - Procedure da remoto</title>
+
+<!-- Font Awesome (versione compatibile) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <style>
-body { font-family: Arial, sans-serif; display: flex; }
-#menu { width: 250px; padding: 10px; border-right: 1px solid #ccc; }
-#menu ul { list-style: none; padding: 0; }
-#menu ul li { margin: 5px 0; }
-#content { padding: 20px; flex: 1; }
-.highlight { background: yellow; }
-summary { cursor: pointer; font-weight: bold; }
+  :root {
+    --sidebar-bg: #003f66;
+    --accent: #0078d7;
+  }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* Sidebar */
+  nav#sidebar {
+    width: 260px;
+    background: var(--sidebar-bg);
+    color: #e6f2ff;
+    padding: 18px;
+    box-sizing: border-box;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  nav#sidebar h1 {
+    font-size: 16px;
+    margin: 0 0 12px 0;
+  }
+  nav#sidebar input[type="search"] {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: none;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+  nav#sidebar ul { list-style: none; padding: 0; margin: 0; }
+  nav#sidebar li { margin: 6px 0; }
+  nav#sidebar a { color: #e6f2ff; text-decoration: none; display: block; padding: 6px 6px; border-radius: 4px;}
+  nav#sidebar a:hover { background: rgba(255,255,255,0.04); }
+
+  /* Main */
+  main#main {
+    margin-left: 260px;
+    padding: 20px;
+    flex: 1;
+    background: #f6f8fa;
+  }
+
+  /* Details / Sections */
+  details.section {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+  }
+  details.section[open] {
+    box-shadow: 0 4px 14px rgba(2,6,23,0.06);
+  }
+  details summary {
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+    margin: -12px -14px 8px -14px;
+    padding: 12px 14px;
+    background: transparent;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .section-controls {
+    float: right;
+    margin-top: -32px;
+  }
+  .copy-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .copy-btn:active { transform: translateY(1px); }
+
+  .section-content {
+    white-space: pre-wrap;
+    color: #222;
+    line-height: 1.45;
+    margin-top: 6px;
+  }
+
+  /* Highlight */
+  span.highlight {
+    background: #ffea7a;
+    color: #111;
+    padding: 0 2px;
+    font-weight: 700;
+    border-radius: 2px;
+  }
+
+  /* icon small spacing */
+  .fa-fw { width: 1.25em; text-align: center; }
+
+  /* small screens */
+  @media (max-width: 800px) {
+    nav#sidebar { position: relative; width: 100%; height: auto; }
+    main#main { margin-left: 0; padding: 12px; }
+  }
 </style>
 </head>
 <body>
 
-<div id="menu">
-  <input type="text" id="searchBox" placeholder="Cerca..." style="width:100%;padding:5px;">
+<nav id="sidebar" aria-label="Indice vademecum">
+  <h1>Vademecum Web per Attività</h1>
+  <input id="searchBox" type="search" placeholder="Cerca in tutto il vademecum..." aria-label="Cerca" autocomplete="off" />
   <ul id="menuList"></ul>
-</div>
+</nav>
 
-<div id="content">
-  <!-- Esempio struttura -->
-  <details class="section" id="sec1">
-    <summary>1. Diagnostica di sistema</summary>
+<main id="main" role="main">
+  <!-- Sezione 1 -->
+  <details id="proc1" class="section">
+    <summary>1. Procedura da remoto: Verifica e risoluzione PC lento</summary>
+    <div class="section-controls">
+      <button class="copy-btn" data-target="proc1">Copia</button>
+    </div>
     <div class="section-content">
-      <p>Connessione remota</p>
-      <p>Verifica carico risorse</p>
-      <p>Identifica processi pesanti</p>
-      <p>Controlla spazio disco</p>
+Obiettivo: Identificare cause di rallentamento e risolvere problemi prestazionali.
+
+Passi:
+1. Connessione remota - Accedi al PC tramite software remoto (es. AnyDesk, TeamViewer, Remote Desktop).
+
+2. Verifica carico risorse - Apri Task Manager (Ctrl + Shift + Esc) → scheda Prestazioni
+   Controlla CPU, RAM, disco e rete per picchi o utilizzi anomali.
+
+3. Identifica processi pesanti - Task Manager → scheda Processi. Ordina per CPU o memoria.
+
+4. Verifica servizi e processi anomali - Task Manager → scheda Servizi. Riavvia servizi se necessario.
+
+5. Controlla avvio automatico - Task Manager → scheda Avvio. Disabilita programmi non necessari.
+
+6. Controlla spazio disco - Apri “Questo PC” → verifica spazio disponibile su disco C:.
+
+7. Esegui scansione malware - Avvia scansione antivirus aggiornata.
+
+8. Aggiorna Windows e driver - Impostazioni > Windows Update; aggiorna driver dal produttore.
+
+9. Riavvio finale - Riavvia il PC per applicare le modifiche.
+
+10. Verifica finale - Controlla miglioramento e comunica con l’utente.
     </div>
   </details>
 
-  <details class="section" id="sec2">
-    <summary>2. Diagnostica rete</summary>
+  <!-- Sezione 2 -->
+  <details id="proc2" class="section">
+    <summary>2. Procedura da remoto: Problema connessione internet / rete</summary>
+    <div class="section-controls">
+      <button class="copy-btn" data-target="proc2">Copia</button>
+    </div>
     <div class="section-content">
-      <p>Verifica stato rete</p>
-      <p>Ping test</p>
-      <p>Verifica configurazione rete</p>
+Obiettivo: Diagnosticare e risolvere problemi di connettività.
+
+Passi:
+1. Connessione remota.
+
+2. Verifica stato rete - Win + R → cmd → esegui ipconfig /all.
+
+3. Ping test - ping 8.8.8.8 e ping google.com.
+
+4. Verifica gateway e rete locale - ping <gateway> (es. 192.168.1.1).
+
+5. Reset stack TCP/IP e DNS:
+   netsh int ip reset
+   ipconfig /flushdns
+   ipconfig /release
+   ipconfig /renew
+
+6. Verifica configurazione proxy/VPN.
+
+7. Disabilita temporaneamente firewall/antivirus per test.
+
+8. Verifica cavi e dispositivi - controlla collegamenti fisici.
+
+9. Riavvia scheda di rete - Disabilita e riabilita la scheda.
+
+10. Segnala se necessario a livello superiore.
     </div>
   </details>
 
-  <details class="section" id="sec3">
+  <!-- Sezione 3 -->
+  <details id="proc3" class="section">
     <summary>3. Procedura da remoto: Problema stampante</summary>
+    <div class="section-controls">
+      <button class="copy-btn" data-target="proc3">Copia</button>
+    </div>
     <div class="section-content">
-      <p>Verifica stato stampante</p>
-      <p>Test di stampa</p>
-      <p>Verifica configurazione rete</p> <!-- icona mancante aggiunta via script -->
+Obiettivo: Risolvere problemi di stampa o riconoscimento stampante.
+
+Passi:
+1. Connessione remota.
+
+2. Verifica stato stampante - Controlla che la stampante sia accesa e collegata (USB o rete).
+
+3. Controlla code di stampa - Elimina lavori bloccati.
+
+4. Riavvia spooler di stampa:
+   net stop spooler
+   net start spooler
+
+5. Verifica driver stampante - Aggiorna o reinstalla driver.
+
+6. Test di stampa - Esegui pagina di prova.
+
+7. Verifica configurazione rete - Ping all’indirizzo IP stampante.   <!-- icona rete applicata via script -->
+
+8. Controlla permessi di stampa e condivisione.
+
+9. Riavvia PC e stampante.
     </div>
   </details>
-</div>
+
+  <!-- Sezione 4 -->
+  <details id="proc4" class="section">
+    <summary>4. Procedura da remoto: Aggiornamento software o driver</summary>
+    <div class="section-controls">
+      <button class="copy-btn" data-target="proc4">Copia</button>
+    </div>
+    <div class="section-content">
+Obiettivo: Aggiornare software o driver per migliorare stabilità o sicurezza.
+
+Passi:
+1. Connessione remota.
+
+2. Verifica versione corrente.
+
+3. Backup dati/configurazioni (se necessario).
+
+4. Scarica aggiornamenti ufficiali.
+
+5. Installa aggiornamenti.
+
+6. Verifica esito installazione.
+
+7. Riavvia sistema se richiesto.
+
+8. Test funzionalità.
+    </div>
+  </details>
+
+</main>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const menuList = document.getElementById("menuList");
-  const searchBox = document.getElementById("searchBox");
-  const sections = document.querySelectorAll("details.section");
+/* ========== Helper ========== */
+function escapeRegExp(s) {
+  return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+function removeHighlights(root) {
+  const spans = root.querySelectorAll('span.highlight');
+  spans.forEach(sp => sp.replaceWith(document.createTextNode(sp.textContent)));
+}
+function highlightInElement(root, query) {
+  if (!query) return;
+  const escaped = escapeRegExp(query);
+  const regex = new RegExp(escaped, 'gi');
 
-  sections.forEach(section => {
-    const summary = section.querySelector("summary");
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-    a.href = "#" + section.id;
-    a.textContent = summary.textContent;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(node) {
+      if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      let p = node.parentNode;
+      while (p && p !== root) {
+        if (p.nodeName === 'BUTTON') return NodeFilter.FILTER_REJECT;
+        p = p.parentNode;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  }, false);
+
+  const textNodes = [];
+  while(walker.nextNode()) textNodes.push(walker.currentNode);
+
+  textNodes.forEach(node => {
+    const textLower = node.nodeValue.toLowerCase();
+    if (textLower.indexOf(query.toLowerCase()) === -1) return;
+
+    const originalText = node.nodeValue;
+    let lastIndex = 0;
+    const frag = document.createDocumentFragment();
+    let match;
+    while ((match = regex.exec(originalText)) !== null) {
+      const idx = match.index;
+      if (idx > lastIndex) frag.appendChild(document.createTextNode(originalText.substring(lastIndex, idx)));
+      const span = document.createElement('span');
+      span.className = 'highlight';
+      span.textContent = match[0];
+      frag.appendChild(span);
+      lastIndex = idx + match[0].length;
+    }
+    if (lastIndex < originalText.length) frag.appendChild(document.createTextNode(originalText.substring(lastIndex)));
+    node.parentNode.replaceChild(frag, node);
+  });
+}
+
+/* ========== Main ========== */
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = Array.from(document.querySelectorAll('details.section'));
+  const menuList = document.getElementById('menuList');
+  const searchBox = document.getElementById('searchBox');
+
+  // 1) salva originali (summary + content)
+  sections.forEach(sec => {
+    const summary = sec.querySelector('summary');
+    const content = sec.querySelector('.section-content');
+    summary.setAttribute('data-original', summary.innerHTML);
+    content.setAttribute('data-original', content.innerHTML);
+  });
+
+  // 2) costruisci il menu con handler che apre la sezione corretta (e pulisce filtro)
+  sections.forEach(sec => {
+    const a = document.createElement('a');
+    a.href = '#' + sec.id;
+    a.textContent = sec.querySelector('summary').textContent.trim();
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      clearSearchAndRestore();            // cancella filtro e ripristina contenuti
+      sections.forEach(s => s.open = false);
+      sec.open = true;
+      setTimeout(() => sec.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+    });
+    const li = document.createElement('li');
     li.appendChild(a);
     menuList.appendChild(li);
-    section.dataset.original = section.querySelector(".section-content").innerHTML;
   });
 
-  searchBox.addEventListener("input", () => {
-    const q = searchBox.value.toLowerCase();
-    sections.forEach(section => {
-      const content = section.dataset.original;
-      if (content.toLowerCase().includes(q) || section.querySelector("summary").textContent.toLowerCase().includes(q)) {
-        section.style.display = "";
-        section.open = q !== "";
-        if (q) {
-          section.querySelector(".section-content").innerHTML =
-            content.replace(new RegExp(`(${q})`, "gi"), `<span class="highlight">$1</span>`);
-        } else {
-          section.querySelector(".section-content").innerHTML = content;
-        }
-      } else {
-        section.style.display = "none";
-      }
-    });
-  });
-
+  // 3) mappa icone e colori
   const iconMap = {
     "Connessione remota": "fa-laptop-code",
     "Verifica carico risorse": "fa-microchip",
     "Identifica processi pesanti": "fa-tasks",
+    "Verifica servizi": "fa-cogs",
+    "Controlla avvio automatico": "fa-cogs",
     "Controlla spazio disco": "fa-hdd",
+    "Esegui scansione malware": "fa-shield-virus",
+    "Aggiorna Windows": "fa-sync-alt",
+    "Riavvio finale": "fa-power-off",
+    "Verifica finale": "fa-check-circle",
     "Verifica stato rete": "fa-network-wired",
     "Ping test": "fa-search",
-    "Verifica configurazione rete": "fa-network-wired",
+    "Reset stack TCP/IP": "fa-sync-alt",
+    "Verifica configurazione proxy": "fa-cogs",
+    "Disabilita temporaneamente firewall": "fa-ban",
+    "Verifica cavi": "fa-plug",
+    "Riavvia scheda di rete": "fa-sync",
+    "Segnala": "fa-phone",
     "Verifica stato stampante": "fa-print",
-    "Test di stampa": "fa-print"
+    "Controlla code di stampa": "fa-trash",
+    "Riavvia spooler": "fa-sync-alt",
+    "Verifica driver stampante": "fa-cogs",
+    "Test di stampa": "fa-print",
+    "Verifica configurazione rete": "fa-network-wired",
+    "Controlla permessi": "fa-lock",
+    "Verifica versione corrente": "fa-clipboard-list",
+    "Backup dati": "fa-folder-open",
+    "Scarica aggiornamenti": "fa-download",
+    "Installa aggiornamenti": "fa-cogs",
+    "Verifica esito installazione": "fa-check-circle",
+    "Riavvia sistema": "fa-sync-alt",
+    "Test funzionalità": "fa-vial"
   };
 
   const iconColors = {
-    diagnostica: "#0078d7",
-    rete: "#28a745",
-    sicurezza: "#dc3545",
-    aggiornamento: "#ffc107"
+    diagnostica: "#0078d7",   // blu
+    rete: "#28a745",          // verde
+    sicurezza: "#dc3545",     // rosso
+    aggiornamento: "#ffc107"  // giallo
   };
 
   const categoryMap = {
     "fa-microchip": "diagnostica",
     "fa-tasks": "diagnostica",
     "fa-hdd": "diagnostica",
+    "fa-laptop-code": "diagnostica",
     "fa-network-wired": "rete",
     "fa-search": "rete",
+    "fa-plug": "rete",
+    "fa-sync": "rete",
+    "fa-shield-virus": "sicurezza",
+    "fa-ban": "sicurezza",
+    "fa-lock": "sicurezza",
+    "fa-sync-alt": "aggiornamento",
+    "fa-download": "aggiornamento",
+    "fa-vial": "aggiornamento",
     "fa-print": "rete"
   };
 
-  document.querySelectorAll(".section-content").forEach(content => {
-    let html = content.innerHTML;
+  // 4) applica icone ai contenuti (crea versione 'iconified' e la salva)
+  sections.forEach(sec => {
+    const content = sec.querySelector('.section-content');
+    let html = content.getAttribute('data-original');
     Object.entries(iconMap).forEach(([text, icon]) => {
-      const regex = new RegExp(`(${text})`, "g");
+      const regex = new RegExp(escapeRegExp(text), 'g');
       const color = iconColors[categoryMap[icon]] || "#555";
-      html = html.replace(regex, `<i class="fas ${icon}" style="color:${color}"></i> $1`);
+      html = html.replace(regex, `<i class="fas ${icon} fa-fw" aria-hidden="true" style="color:${color}"></i> ${text}`);
     });
+    content.dataset.iconified = html;
     content.innerHTML = html;
   });
 
-  document.querySelectorAll("details.section summary").forEach(summary => {
-    const text = summary.textContent.trim();
-    let iconKey = Object.keys(iconMap).find(k => text.includes(k));
+  // 5) aggiungi icone anche ai sommari (summary) — salviamo versioni iconified per i summary
+  sections.forEach(sec => {
+    const summary = sec.querySelector('summary');
+    const summaryText = summary.textContent.trim();
+    // prova a trovare la migliore chiave presente nel testo
+    let iconKey = Object.keys(iconMap).find(k => summaryText.toLowerCase().includes(k.toLowerCase()));
     if (!iconKey) {
-      if (text.toLowerCase().includes("stampante")) iconKey = "Verifica stato stampante";
-      else if (text.toLowerCase().includes("rete")) iconKey = "Verifica stato rete";
-      else if (text.toLowerCase().includes("diagnostica")) iconKey = "Verifica carico risorse";
+      // fallback per parole chiave
+      const t = summaryText.toLowerCase();
+      if (t.includes('stampante')) iconKey = "Verifica stato stampante";
+      else if (t.includes('rete') || t.includes('connessione')) iconKey = "Verifica stato rete";
+      else if (t.includes('aggiornamento')) iconKey = "Aggiorna Windows";
+      else if (t.includes('pc lento') || t.includes('verifica')) iconKey = "Verifica carico risorse";
     }
     if (iconKey) {
       const icon = iconMap[iconKey];
       const color = iconColors[categoryMap[icon]] || "#555";
-      summary.innerHTML = `<i class="fas ${icon}" style="color:${color};margin-right:6px"></i>` + summary.textContent;
+      const sHtml = `<i class="fas ${icon} fa-fw" aria-hidden="true" style="color:${color};margin-right:8px"></i>` + summaryText;
+      summary.dataset.iconified = sHtml;
+      summary.innerHTML = sHtml;
+    } else {
+      // salva anche se non iconified: utile in restore
+      summary.dataset.iconified = summary.getAttribute('data-original');
     }
   });
 
-  document.querySelectorAll("#menuList a, details.section summary").forEach(el => {
-    el.addEventListener("click", () => {
-      searchBox.value = "";
-      sections.forEach(section => {
-        section.style.display = "";
-        section.querySelector(".section-content").innerHTML = section.dataset.original;
+  // 6) copy buttons
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-target');
+      const sec = document.getElementById(id);
+      if (!sec) return;
+      const summaryText = sec.querySelector('summary').textContent.trim();
+      const contentText = sec.querySelector('.section-content').innerText.trim();
+      const text = summaryText + "\n\n" + contentText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓ Copiato';
+        setTimeout(()=> btn.textContent = 'Copia', 1400);
+      }).catch(()=> {
+        alert('Impossibile copiare negli appunti');
       });
     });
   });
+
+  // 7) restore helper — ripristina tutte le sezioni e i contenuti iconified
+  function clearSearchAndRestore() {
+    searchBox.value = '';
+    sections.forEach(sec => {
+      sec.style.display = '';
+      sec.open = false;
+      const summary = sec.querySelector('summary');
+      const content = sec.querySelector('.section-content');
+      summary.innerHTML = summary.dataset.iconified || summary.getAttribute('data-original');
+      content.innerHTML = content.dataset.iconified || content.getAttribute('data-original');
+      removeHighlights(summary);
+      removeHighlights(content);
+    });
+  }
+
+  // 8) gestione ricerca (debounce)
+  let searchTimer = null;
+  function doSearch() {
+    const q = searchBox.value.trim();
+    if (!q) {
+      clearSearchAndRestore();
+      return;
+    }
+    const lowered = q.toLowerCase();
+    const matches = [];
+    sections.forEach(sec => {
+      const summary = sec.querySelector('summary');
+      const content = sec.querySelector('.section-content');
+
+      // partire sempre dalla versione iconified
+      summary.innerHTML = summary.dataset.iconified || summary.getAttribute('data-original');
+      content.innerHTML = content.dataset.iconified || content.getAttribute('data-original');
+      removeHighlights(summary);
+      removeHighlights(content);
+
+      const combined = (summary.textContent + ' ' + content.textContent).toLowerCase();
+      if (combined.indexOf(lowered) !== -1) {
+        sec.style.display = '';
+        sec.open = true;
+        highlightInElement(summary, q);
+        highlightInElement(content, q);
+        matches.push(sec);
+      } else {
+        sec.style.display = 'none';
+        sec.open = false;
+      }
+    });
+
+    if (matches.length === 1) {
+      setTimeout(() => matches[0].scrollIntoView({behavior:'smooth', block:'start'}), 80);
+    } else if (matches.length > 0) {
+      // scorriamo al primo match
+      setTimeout(() => matches[0].scrollIntoView({behavior:'smooth', block:'start'}), 120);
+    }
+  }
+
+  searchBox.addEventListener('input', () => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(doSearch, 140);
+  });
+
+  // 9) reset filtro se clicco sul summary (mantieni il toggle ma resetta la ricerca)
+  document.querySelectorAll('details.section summary').forEach(summary => {
+    summary.addEventListener('click', (e) => {
+      // prima di qualsiasi altro effetto, ripristina la ricerca (non preveniamo il toggle)
+      searchBox.value = '';
+      sections.forEach(sec => {
+        sec.style.display = '';
+        const c = sec.querySelector('.section-content');
+        const s = sec.querySelector('summary');
+        s.innerHTML = s.dataset.iconified || s.getAttribute('data-original');
+        c.innerHTML = c.dataset.iconified || c.getAttribute('data-original');
+        removeHighlights(s);
+        removeHighlights(c);
+      });
+      // il comportamento nativo del <details> continua (apertura/chiusura)
+      // scroll automatico verso la sezione aperta
+      setTimeout(() => {
+        const parent = summary.closest('details');
+        if (parent && parent.open) parent.scrollIntoView({behavior:'smooth', block:'start'});
+      }, 180);
+    });
+  });
+
+  // inizialmente tutte chiuse
+  sections.forEach(s => s.open = false);
 });
 </script>
-
 </body>
 </html>
